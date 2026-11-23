@@ -1,0 +1,6 @@
+{
+  "name": "Mitch — Ethical AI Companion",
+  "description": "An ethical, platonic AI peer & study companion designed with healthy boundaries, transparent session timing, and mindful check-ins.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
