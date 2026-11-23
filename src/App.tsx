@@ -45,7 +45,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-white text-[#111F21] selection:bg-teal-100 selection:text-[#0A6E6E] dark:bg-[#111F21] dark:text-slate-100 dark:selection:bg-teal-500/30 dark:selection:text-teal-200 transition-colors duration-200">
-      <BackgroundCanvas />
+      <BackgroundCanvas showLandingDecorations={activeTab === "home"} />
 
       <div className="relative z-10 flex min-h-screen flex-col">
         <Navbar
@@ -57,7 +57,10 @@ export default function App() {
 
         <main className="flex-1">
           {activeTab === "home" && (
-            <HomeHero onStartChatting={handleStartChatting} />
+            <HomeHero
+              onStartChatting={handleStartChatting}
+              onExploreWhy={() => handleSelectTab("why")}
+            />
           )}
 
           <div className={activeTab === "chat" ? "block" : "hidden"}>

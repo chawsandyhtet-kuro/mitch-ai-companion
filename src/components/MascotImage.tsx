@@ -7,12 +7,30 @@ interface MascotImageProps {
   className?: string;
 }
 
-const MASCOT_SRCS: Record<MascotImageProps["variant"], string> = {
-  sitting: "/assets/mitch-home-sitting.png",
-  waving: "/assets/mitch-home-waving.png",
+const SINGLE_SRCS: Record<
+  Exclude<MascotImageProps["variant"], "sitting" | "waving" | "about-sitting">,
+  string
+> = {
   "chat-happy": "/assets/mitch-chat-happy.png",
-  "about-sitting": "/assets/mitch-about-sitting.png",
   logo: "/assets/mitch-logo-icon.png",
+};
+
+const THEMED_SRCS: Record<
+  Extract<MascotImageProps["variant"], "sitting" | "waving" | "about-sitting">,
+  { light: string; dark: string }
+> = {
+  sitting: {
+    light: "/assets/mitch-home-sitting-light.png",
+    dark: "/assets/mitch-home-sitting-dark.png",
+  },
+  waving: {
+    light: "/assets/mitch-home-waving-light.png",
+    dark: "/assets/mitch-home-waving-dark.png",
+  },
+  "about-sitting": {
+    light: "/assets/mitch-about-sitting.png",
+    dark: "/assets/mitch-about-sitting-dark.png",
+  },
 };
 
 export function MascotImage({ variant, alt, className = "" }: MascotImageProps) {
@@ -30,9 +48,35 @@ export function MascotImage({ variant, alt, className = "" }: MascotImageProps) 
     );
   }
 
+  if (
+    variant === "sitting" ||
+    variant === "waving" ||
+    variant === "about-sitting"
+  ) {
+    const pair = THEMED_SRCS[variant];
+    return (
+      <>
+        <img
+          src={pair.light}
+          alt={alt}
+          referrerPolicy="no-referrer"
+          onError={() => setHasError(true)}
+          className={`select-none object-contain dark:hidden ${className}`}
+        />
+        <img
+          src={pair.dark}
+          alt={alt}
+          referrerPolicy="no-referrer"
+          onError={() => setHasError(true)}
+          className={`hidden select-none object-contain dark:block ${className}`}
+        />
+      </>
+    );
+  }
+
   return (
     <img
-      src={MASCOT_SRCS[variant]}
+      src={SINGLE_SRCS[variant]}
       alt={alt}
       referrerPolicy="no-referrer"
       onError={() => setHasError(true)}
