@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Home, MessageSquare, ShieldCheck, Info, Menu, X, Sun, Moon } from "lucide-react";
+import { Home, MessageSquare, Gamepad2, ShieldCheck, Info, Menu, X, Sun, Moon } from "lucide-react";
 import { MascotImage } from "./MascotImage";
 import type { NavTab } from "../types";
 
@@ -13,6 +13,7 @@ interface NavbarProps {
 const NAV_ITEMS: Array<{ id: NavTab; label: string; shortLabel: string; icon: typeof Home }> = [
   { id: "home", label: "Home", shortLabel: "Home", icon: Home },
   { id: "chat", label: "Chat with Mitch", shortLabel: "Chat", icon: MessageSquare },
+  { id: "play", label: "Play with Mitch", shortLabel: "Play", icon: Gamepad2 },
   { id: "why", label: "Why Mitch", shortLabel: "Why Mitch", icon: ShieldCheck },
   { id: "about", label: "About Me", shortLabel: "About", icon: Info },
 ];
@@ -29,7 +30,7 @@ export function Navbar({ activeTab, onSelectTab, theme, onToggleTheme }: NavbarP
   return (
     <>
       <header className="sticky top-0 z-40 h-16 md:h-20 bg-white/85 dark:bg-[#111F21]/85 backdrop-blur-md transition-colors duration-200">
-        <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-6 px-4 sm:px-8">
+        <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-8">
           {/* Zone 1: Mitch Teal Chat-Bubble Logo + Wordmark */}
           <button
             type="button"
@@ -46,10 +47,10 @@ export function Navbar({ activeTab, onSelectTab, theme, onToggleTheme }: NavbarP
             </span>
           </button>
 
-          {/* Zone 2: 4 Clean Single-Line Nav Links */}
+          {/* Zone 2: 5 Clean Single-Line Nav Links */}
           <nav
             aria-label="Primary navigation"
-            className="hidden md:flex items-center gap-8 lg:gap-12"
+            className="hidden md:flex items-center gap-3.5 lg:gap-7"
           >
             {NAV_ITEMS.map((item) => {
               const isActive = activeTab === item.id;
@@ -58,7 +59,7 @@ export function Navbar({ activeTab, onSelectTab, theme, onToggleTheme }: NavbarP
                   key={item.id}
                   type="button"
                   onClick={() => handleNavigate(item.id)}
-                  className={`relative py-2 text-[15px] font-medium whitespace-nowrap shrink-0 transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0D8B8B] rounded-md px-1 ${
+                  className={`relative py-2 text-[14px] lg:text-[15px] font-medium whitespace-nowrap shrink-0 transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0D8B8B] rounded-md px-1 ${
                     isActive
                       ? "text-[#0D8B8B] dark:text-[#2DD4BF] font-semibold"
                       : "text-slate-700 hover:text-[#0D8B8B] dark:text-slate-200 dark:hover:text-white"

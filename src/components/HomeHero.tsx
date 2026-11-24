@@ -89,7 +89,7 @@ const SESSION_MILESTONES = [
 
 export function HomeHero({ onStartChatting, onExploreWhy }: HomeHeroProps) {
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 pt-2 pb-24 sm:px-8 md:pb-12">
+    <div className="mx-auto w-full max-w-7xl px-4 pt-2 pb-28 sm:px-8 md:pb-12">
       {/* 1. Full Editorial Hero Split */}
       <section className="grid grid-cols-1 items-center gap-8 py-4 lg:grid-cols-12 lg:gap-8 lg:py-10">
         {/* Left: Bold Headline, Lead Copy, CTAs & Quick Starters */}
@@ -377,9 +377,11 @@ export function HomeHero({ onStartChatting, onExploreWhy }: HomeHeroProps) {
         </button>
       </section>
 
-      <footer className="mt-10 flex flex-col items-center justify-between gap-2 border-t border-slate-200/80 pt-6 text-xs text-slate-500 sm:flex-row dark:border-[#1E3A3D] dark:text-slate-400">
-        <span>Mitch · Ethical Platonic AI Peer &amp; Study Companion</span>
-        <span>Rangsit University · Created by Kuro &amp; Bokakae</span>
+      <footer className="mt-10 flex flex-col items-center justify-between gap-2 border-t border-slate-200/80 pt-6 text-xs text-slate-600 sm:flex-row dark:border-[#1E3A3D] dark:text-slate-300">
+        <span>Mitch · Ethical Platonic AI Peer &amp; Study Companion · Rangsit University</span>
+        <span className="font-semibold text-[#111F21] dark:text-white">
+          Created by Kuro &amp; Bokakae
+        </span>
       </footer>
     </div>
   );

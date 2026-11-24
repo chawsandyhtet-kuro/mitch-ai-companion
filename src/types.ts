@@ -1,4 +1,4 @@
-export type NavTab = "home" | "chat" | "why" | "about";
+export type NavTab = "home" | "chat" | "play" | "why" | "about";
 
 export interface ChatMessage {
   id: string;

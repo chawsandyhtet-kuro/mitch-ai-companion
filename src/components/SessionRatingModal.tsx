@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, Clock, Star, X } from "lucide-react";
+import { CheckCircle2, Clock, Gamepad2, Star, X } from "lucide-react";
 
 interface SessionRatingModalProps {
   isOpen: boolean;
@@ -7,6 +7,7 @@ interface SessionRatingModalProps {
   formattedTime: string;
   reachedThirtyMinCap: boolean;
   onStartNewSession: () => void;
+  onGoToPlay?: () => void;
   onClose: () => void;
 }
 
@@ -46,6 +47,7 @@ export function SessionRatingModal({
   formattedTime,
   reachedThirtyMinCap,
   onStartNewSession,
+  onGoToPlay,
   onClose,
 }: SessionRatingModalProps) {
   const [selectedScore, setSelectedScore] = useState<number | null>(null);
@@ -66,6 +68,13 @@ export function SessionRatingModal({
     onStartNewSession();
   };
 
+  const handleSwitchToPlay = () => {
+    setSelectedScore(null);
+    setSubmitted(false);
+    onClose();
+    onGoToPlay?.();
+  };
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/45 dark:bg-black/70 p-4 backdrop-blur-sm"
@@ -73,7 +82,7 @@ export function SessionRatingModal({
       aria-modal="true"
       aria-labelledby="session-rating-title"
     >
-      <div className="relative w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sm:p-7 dark:border-slate-700 dark:bg-[#131E23]">
+      <div className="relative w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-6 shadow-xl sm:p-7 dark:border-slate-700 dark:bg-[#131E23]">
         <button
           type="button"
           onClick={onClose}
@@ -140,18 +149,28 @@ export function SessionRatingModal({
           )}
         </div>
 
-        <div className="mt-6 flex flex-col-reverse gap-2.5 sm:flex-row sm:justify-end">
+        <div className="mt-6 flex flex-col-reverse gap-2.5 sm:flex-row sm:flex-wrap sm:justify-end">
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-[#1B2930] dark:text-slate-200 dark:hover:bg-[#22333B] whitespace-nowrap cursor-pointer"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-[#1B2930] dark:text-slate-200 dark:hover:bg-[#22333B] whitespace-nowrap cursor-pointer"
           >
             Close
           </button>
+          {onGoToPlay && (
+            <button
+              type="button"
+              onClick={handleSwitchToPlay}
+              className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-teal-300 bg-teal-50 px-5 py-2.5 text-sm font-semibold text-[#0A6E6E] transition-colors hover:bg-teal-100 dark:border-teal-500/40 dark:bg-teal-950/60 dark:text-teal-200 dark:hover:bg-teal-900/70 whitespace-nowrap cursor-pointer"
+            >
+              <Gamepad2 className="h-4 w-4 shrink-0" />
+              <span>Play with Mitch</span>
+            </button>
+          )}
           <button
             type="button"
             onClick={handleResetAndClose}
-            className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[#0D8B8B] dark:bg-[#119E9E] px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0A7373] dark:hover:bg-[#0D8B8B] whitespace-nowrap cursor-pointer"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[#0D8B8B] dark:bg-[#119E9E] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0A7373] dark:hover:bg-[#0D8B8B] whitespace-nowrap cursor-pointer"
           >
             Start Fresh Session
           </button>
